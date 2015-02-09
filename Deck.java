@@ -23,8 +23,8 @@ public class Deck {
 	}
 
 	public Card drawCard() {
-		Card cardDrawn = deck.get((int) (Math.random() * 51 + 1));
-		deck.remove(cardDrawn);
+		Card cardDrawn = deck.get(0);
+		deck.remove(0);
 		System.out.println(deck.size());
 		return cardDrawn;
 
