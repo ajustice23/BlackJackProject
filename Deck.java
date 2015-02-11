@@ -14,8 +14,6 @@ public class Deck {
 			}
 		}
 		Collections.shuffle(deck);	
-
-		System.out.println(deck.size());
 	}
 
 
@@ -23,8 +21,9 @@ public class Deck {
 		
 		Card cardDrawn = deck.get(i);
 		i++;
-		System.out.println(52-i);
+		//System.out.println(52-i);
 		return cardDrawn;
 
 	}
+	
 }
