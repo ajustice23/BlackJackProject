@@ -6,10 +6,6 @@ import java.awt.image.*;
 import javax.swing.*;
 
 import java.util.*;
-import java.io.*;
-import java.lang.*;
-
-import javax.imageio.*;
  
  
 public class ShowCard extends JPanel implements ActionListener{
@@ -17,32 +13,29 @@ public class ShowCard extends JPanel implements ActionListener{
 	   static int WindowHeight = 700;
 	   
 	   Hand thisHand = null;
+	   Deck thisDeck = null;
 	   ArrayList<Card> theCards = new ArrayList<Card>();
-	   static ArrayList<BufferedImage> cardImages = new ArrayList<BufferedImage>();
+	   int round = 0;
 	 
-	   JButton Play = new JButton("Play");
-	   JTextField input = new JTextField(7);  //text field to hold user input
+	   JButton Hit = new JButton("Hit Me");
 	   
-	   public ShowCard(Hand h){
+	   public ShowCard(Hand h, Deck d){
 	       
 		   thisHand = h;
+		   thisDeck = d;
 		   theCards = thisHand.getHand();
-		   
-		   for (Card s : theCards){
-			   cardImages.add(s.getFace());
-		   }
 		   
 	      setPreferredSize(new Dimension(WindowWidth,WindowHeight));
 	      setBackground(new Color(0, 255, 0, 128));
 	      
-	      this.add(Play);  //adds button so stuff can be done
-		    Play.addActionListener(this);
+	      this.add(Hit);  //adds button so stuff can be done
+		    Hit.addActionListener(this);
 	   }
 	 
-	  static public void showCards(Hand hh) {
+	  static public void showCards(Hand hh, Deck dd) {
 	     JFrame frame = new JFrame("Blackjack!");
 	     Container cnt = frame.getContentPane();
-	     ShowCard pnl = new ShowCard(hh);
+	     ShowCard pnl = new ShowCard(hh, dd);
 	     cnt.add(pnl);
 	     frame.pack();
 	     frame.setVisible(true);
@@ -54,14 +47,25 @@ public class ShowCard extends JPanel implements ActionListener{
 		  super.paintComponent(gr);
 		  int xx = 50;
 		  int yy = 50;
+		  
+		  ArrayList<BufferedImage> cardImages = new ArrayList<BufferedImage>();
+		  for (Card s : theCards){
+			   cardImages.add(s.getFace());
+		   }
 		  for (BufferedImage i : cardImages){
 			 gr.drawImage(i, xx, yy, (ImageObserver)null);
-			 xx = xx+100;
+			 xx = xx+50;
 		  }
+		  
+		  int zz = xx+200;
+		  gr.setColor(Color.blue);
+		  gr.drawString("Round: " + round + " Your Score is: " + thisHand.checkScore(), 350, zz+5);
 	  }
 	  
 	  public void actionPerformed(ActionEvent e){  //this just makes sure something happens when the button is pressed
-			if(e.getSource() == Play){
+			if(e.getSource() == Hit && round < 5){
+				thisHand.hitMe(thisDeck.drawCard());
+				round++;
 				repaint();
 			}
 	  }

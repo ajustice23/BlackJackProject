@@ -4,11 +4,11 @@ public class playBlackJack { //main method
  	 	Deck tryDeck = new Deck();
 		Hand currentHand = new Hand(tryDeck.drawCard(),tryDeck.drawCard());
 		currentHand.toString();
-		currentHand.hitMe(tryDeck.drawCard());
+		//currentHand.hitMe(tryDeck.drawCard());
 		//currentHand.score();
 		//currentHand.askUser();
  	 	
- 	 	ShowCard.showCards(currentHand);
+ 	 	ShowCard.showCards(currentHand, tryDeck);
   }
 }
 

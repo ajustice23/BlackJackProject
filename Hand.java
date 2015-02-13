@@ -27,13 +27,11 @@ public class Hand {
 		}
 		return null;
 	}
-	
 
 	public void hitMe(Card c){  //adds a card to the hand arraylist
 		hand.add(c);
 		toString();
 		System.out.println("Your points are: " + checkScore());
-		
 	}
 	
 	public int checkScore(){
