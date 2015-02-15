@@ -34,6 +34,16 @@ public class Hand {
 		System.out.println("Your points are: " + checkScore());
 	}
 	
+	public void split(ArrayList<Card> handtosplit){  //splits the arraylist of coice 
+		Deck newhand = new Deck();
+		if(handtosplit.get(0).getNumber()==handtosplit.get(1).getNumber()){ //checks to see if cards in hand are equal
+			splithand.add(hand.get(0)); //adds a card from the hand to splithand
+			handtosplit.remove(0); //removes the card added to splithand
+			splithand.add(newhand.drawCard()); //adds a card to our new split hand
+			handtosplit.add(newhand.drawCard());//adds a card to our hand
+		}
+	}
+	
 	public int checkScore(){
 		int ace=0;
 		score=0;
