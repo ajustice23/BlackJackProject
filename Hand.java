@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Hand {
 	ArrayList<Card> hand = new ArrayList<Card>();
+	ArrayList<Card> splithand = new ArrayList<Card>();
 	
 	int count;
 	int score;
