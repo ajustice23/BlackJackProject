@@ -27,6 +27,7 @@ public class ShowCard extends JPanel implements ActionListener {
 	   static final int sliderMax = 100;
 	   JSlider bettingSlider = new JSlider(JSlider.HORIZONTAL,100, 0);
 
+	   int betPool;
 
 
 	   public ShowCard(Hand h, Deck d){
@@ -80,7 +81,7 @@ public class ShowCard extends JPanel implements ActionListener {
 		  
 		  int zz = xx+200;
 		  gr.setColor(Color.blue);
-		  gr.drawString("Round: " + round + " Your Score is: " + thisHand.checkScore(theCards), 350, zz+5);
+		  gr.drawString("Round: " + round + " Your Score is: " + thisHand.checkScore(theCards) + " Your purse: $"+thisHand.getMoney() , 350, zz+5);
 	  }
 	  
 	  public void actionPerformed(ActionEvent e){  //this just makes sure something happens when the button is pressed
@@ -88,11 +89,18 @@ public class ShowCard extends JPanel implements ActionListener {
 		  if(e.getSource() == Hit && round < 5){
 				thisHand.hitMe(thisDeck.drawCard(),theCards);
 				round++;
+				//natural BlackJack
+				if(thisHand.checkScore(theCards)==21){
+					thisHand.setMoney(thisHand.getMoney()+((int)1.5*betPool));
 				repaint();
 				betCount = 0;
 			}
 			if(e.getSource()==Bet && betCount<1){
-				bettingSlider.getValue();
+				int currentBet = bettingSlider.getValue();
+				betPool=+currentBet;
+				thisHand.setMoney(thisHand.getMoney() - currentBet);
+				
+				}
 				betCount++;
 			}
 	  }
