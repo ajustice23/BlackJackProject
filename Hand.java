@@ -1,54 +1,57 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Hand {
-	ArrayList<Card> hand = new ArrayList<Card>();
-	
+	ArrayList<ArrayList> allhands = new ArrayList<ArrayList>();
 	int count;
 	int score;
-	int money=1000;
-	
+
 	boolean forfeit = false;
 
 	public Hand(Card a, Card b){
+		ArrayList<Card> hand = new ArrayList<Card>();
 		hand.add(a);
 		hand.add(b);
-		System.out.println("score: "+checkScore());
-		}
-	
-	public ArrayList<Card> getHand(){ //shows hand
-		System.out.println(hand);
-		return hand;
+		allhands.add(hand);
+		System.out.println("score: "+checkScore(hand));
 	}
 	
-	public String toString(){
+	
+
+	public ArrayList<Card> getHand(ArrayList<Card> specifichand){ //shows hand
+		System.out.println(specifichand);
+		return specifichand;
+	}
+
+	public String toString(ArrayList<Card> specifichand){
 		System.out.println("Your cards are:");
-		for(Card c:hand){
+		for(Card c: specifichand){
 			System.out.println(c.toString());
 		}
 		return null;
 	}
 
-	public void hitMe(Card c){  //adds a card to the hand arraylist
-		hand.add(c);
+	public void hitMe(Card c, ArrayList<Card> specifichand){  //adds a card to the hand arraylist
+		specifichand.add(c);
 		toString();
-		System.out.println("Your points are: " + checkScore());
+		System.out.println("Your points are: " + checkScore(specifichand));
 	}
-	
-	/*public void split(ArrayList<Card> handtosplit){  //splits the arraylist of coice 
+
+	public void split(ArrayList<Card> handtosplit){  //Splits the arraylist of coice 
 		Deck newhand = new Deck();
-		if(handtosplit.get(0).getNumber()==handtosplit.get(1).getNumber()){ //checks to see if cards in hand are equal
-			splithand.add(hand.get(0)); //adds a card from the hand to splithand
+		ArrayList<Card> splithand = new ArrayList<Card>();
+		if(handtosplit.get(0).getNumber()==handtosplit.get(1).getNumber()){ //Checks to see if cards in hand are equal
+			splithand.add((Card) handtosplit.get(0)); //adds a card from the hand to splithand
 			handtosplit.remove(0); //removes the card added to splithand
 			splithand.add(newhand.drawCard()); //adds a card to our new split hand
 			handtosplit.add(newhand.drawCard());//adds a card to our hand
 		}
-	}*/
-	
-	public int checkScore(){
+		allhands.add(splithand);
+	}
+
+	public int checkScore(ArrayList<Card> handtocheckscore){
 		int ace=0;
 		score=0;
-		for (Card cardvalue: hand){  //adds up points in hand
+		for (Card cardvalue: handtocheckscore){  //adds up points in hand
 			if (cardvalue.getNumber() > 10){ //checks if card is a face card and adds 10
 				score += 10;
 			}
