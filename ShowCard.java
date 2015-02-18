@@ -33,7 +33,7 @@ public class ShowCard extends JPanel implements ActionListener {
 	       
 		   thisHand = h;
 		   thisDeck = d;
-		   theCards = thisHand.getHand();
+		   theCards = thisHand.getHand(theCards);
 		   
 	      setPreferredSize(new Dimension(WindowWidth,WindowHeight));
 	      setBackground(new Color(0, 255, 0, 128));
@@ -80,13 +80,13 @@ public class ShowCard extends JPanel implements ActionListener {
 		  
 		  int zz = xx+200;
 		  gr.setColor(Color.blue);
-		  gr.drawString("Round: " + round + " Your Score is: " + thisHand.checkScore(), 350, zz+5);
+		  gr.drawString("Round: " + round + " Your Score is: " + thisHand.checkScore(theCards), 350, zz+5);
 	  }
 	  
 	  public void actionPerformed(ActionEvent e){  //this just makes sure something happens when the button is pressed
 			int betCount=0; //to prevent betting more than once per hit
 		  if(e.getSource() == Hit && round < 5){
-				thisHand.hitMe(thisDeck.drawCard());
+				thisHand.hitMe(thisDeck.drawCard(),theCards);
 				round++;
 				repaint();
 				betCount = 0;
