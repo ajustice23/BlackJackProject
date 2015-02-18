@@ -4,11 +4,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import java.util.*;
  
  
-public class ShowCard extends JPanel implements ActionListener{
+public class ShowCard extends JPanel implements ActionListener {
 	   static int WindowWidth = 900;
 	   static int WindowHeight = 700;
 	   
@@ -18,7 +20,15 @@ public class ShowCard extends JPanel implements ActionListener{
 	   int round = 0;
 	 
 	   JButton Hit = new JButton("Hit Me");
+	   JButton Bet = new JButton("Bet!");
 	   
+	   //slider code
+	   static final int sliderMin = 0;
+	   static final int sliderMax = 100;
+	   JSlider bettingSlider = new JSlider(JSlider.HORIZONTAL,100, 0);
+
+
+
 	   public ShowCard(Hand h, Deck d){
 	       
 		   thisHand = h;
@@ -27,10 +37,21 @@ public class ShowCard extends JPanel implements ActionListener{
 		   
 	      setPreferredSize(new Dimension(WindowWidth,WindowHeight));
 	      setBackground(new Color(0, 255, 0, 128));
-	      
 	      this.add(Hit);  //adds button so stuff can be done
-		    Hit.addActionListener(this);
+		  Hit.addActionListener(this);
+		  this.add(Bet);
+		  Bet.addActionListener(this);
+
+	      //slider setup
+	      bettingSlider.setMajorTickSpacing(25);
+		  bettingSlider.setMinorTickSpacing(5);
+		  bettingSlider.setPaintTicks(true);
+		  bettingSlider.setPaintLabels(true);
+	      this.add(bettingSlider);
+
+
 	   }
+	   
 	 
 	  static public void showCards(Hand hh, Deck dd) {
 	     JFrame frame = new JFrame("Blackjack!");
@@ -63,10 +84,17 @@ public class ShowCard extends JPanel implements ActionListener{
 	  }
 	  
 	  public void actionPerformed(ActionEvent e){  //this just makes sure something happens when the button is pressed
-			if(e.getSource() == Hit && round < 5){
+			int betCount=0; //to prevent betting more than once per hit
+		  if(e.getSource() == Hit && round < 5){
 				thisHand.hitMe(thisDeck.drawCard());
 				round++;
 				repaint();
+				betCount = 0;
+			}
+			if(e.getSource()==Bet && betCount<1){
+				bettingSlider.getValue();
+				betCount++;
 			}
 	  }
+	  
 	}
