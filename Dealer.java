@@ -9,7 +9,7 @@ public class Dealer extends Hand{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int goDealer(Deck d){
+	public int getDealerScore(){
 		int ace = 0;
 		int score = 0;
 		
@@ -25,7 +25,7 @@ public class Dealer extends Hand{
 				}
 			}
 		} 
-		if (ace > 0 && score > 21){ //ace  anti bust logic
+		/*if (ace > 0 && score > 21){ //ace  anti bust logic
 			score -= 10;
 			ace-=1;// removes 1 ace from ace pool
 		}
@@ -36,8 +36,7 @@ public class Dealer extends Hand{
 		else if (score<17){// hits if less than 17
 			super.hitMe(d.drawCard(), dealerHand);
 			count++;//counts hits
-		}
-		
+		}*/
 		return score;
 	}
 }

@@ -5,12 +5,11 @@ public class Hand {
 	ArrayList<Card> splithand1 = new ArrayList<Card>();
 	int count;
 	int score;
-	int money = 1000;
 
 	boolean forfeit = false;
 
 	public Hand(Card a, Card b){
-		ArrayList<Card> hand = new ArrayList<Card>();
+		//ArrayList<Card> hand = new ArrayList<Card>();
 		MainHand.add(a);
 		MainHand.add(b);
 		//System.out.println("score: "+checkScore(hand));
@@ -72,12 +71,5 @@ public class Hand {
 		else if(score>21)// game winning logic by dealer bust
 			System.out.println("You bust!");
 		return score;
-	}
-	
-	public int getMoney(){
-		return money;
-	}
-	public void setMoney(int b){
-		money=b;
 	}
 }
