@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Hand {
 	ArrayList<Card> MainHand = new ArrayList<Card>();
 	ArrayList<Card> splithand1 = new ArrayList<Card>();
+
 	int count;
 	int score;
 
@@ -14,11 +15,11 @@ public class Hand {
 		MainHand.add(b);
 		//System.out.println("score: "+checkScore(hand));
 	}
-
+	
 	public ArrayList<Card> getMainHand(){ //shows hand
 		return MainHand;
 	}
-	
+
 	public ArrayList<Card> getsplithand(){
 		return splithand1;
 	}
@@ -37,15 +38,11 @@ public class Hand {
 		//System.out.println("Your points are: " + checkScore(specifichand));
 	}
 
-	public void split(ArrayList<Card> handtosplit){  //Splits the arraylist of coice 
-		Deck newhand = new Deck();
-		ArrayList<Card> splithand = new ArrayList<Card>();
-		if(splithand1.get(0).getNumber()==handtosplit.get(1).getNumber()){ //Checks to see if cards in hand are equal
-			splithand1.add((Card) handtosplit.get(0)); //adds a card from the hand to splithand
-			handtosplit.remove(0); //removes the card added to splithand
-			splithand1.add(newhand.drawCard()); //adds a card to our new split hand
-			handtosplit.add(newhand.drawCard());//adds a card to our hand
-		}
+	public void split(Card d, Card e, ArrayList<Card> handtosplit){  //Splits the arraylist of coice 
+		splithand1.add(handtosplit.get(0)); //adds a card from the hand to splithand
+		handtosplit.remove(0); //removes the card added to splithand
+		splithand1.add(d); //adds a card to our new split hand
+		handtosplit.add(e);//adds a card to our hand
 	}
 
 	public int checkScore(ArrayList<Card> handtocheckscore){
