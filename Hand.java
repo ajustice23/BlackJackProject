@@ -6,8 +6,10 @@ public class Hand {
 
 	int count;
 	int score;
+	double money = 1000;
 
 	boolean forfeit = false;
+	boolean win =false; //to determine if player won
 
 	public Hand(Card a, Card b){
 		//ArrayList<Card> hand = new ArrayList<Card>();
@@ -17,6 +19,13 @@ public class Hand {
 	}
 	
 	public ArrayList<Card> getMainHand(){ //shows hand
+		return MainHand;
+	}
+	public ArrayList<Card> redeal(Card a, Card b){
+		MainHand.clear();
+		MainHand.add(a);
+		MainHand.add(b);
+		count = 0;
 		return MainHand;
 	}
 
@@ -35,6 +44,7 @@ public class Hand {
 	public void hitMe(Card c, ArrayList<Card> specifichand){  //adds a card to the hand arraylist
 		specifichand.add(c);
 		toString();
+		count++;
 		//System.out.println("Your points are: " + checkScore(specifichand));
 	}
 
@@ -63,10 +73,26 @@ public class Hand {
 		if (ace > 0 && score > 21){ //ace  anti bust logic
 			score -= 10;
 			ace-=1;// removes 1 ace from ace pool
-		}else if (score<=21 && count==5)// game winning logic by card count
+		}else if (score<=21 && count==5){// game winning logic by card count
 			System.out.println("You win by getting 5 cards!");
-		else if(score>21)// game winning logic by dealer bust
+			win = true;
+		}
+		else if(score>21){// game winning logic by dealer bust
 			System.out.println("You bust!");
+		}else if(score == 21){
+			win=true;
+		}
 		return score;
+	}
+	public boolean didYouWin(){
+		return win;
+	}
+	
+
+	public void setMoney(double m){
+		money=m;
+	}
+	public double getMoney(){
+		return money;
 	}
 }
