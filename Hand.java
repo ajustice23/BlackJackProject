@@ -4,95 +4,89 @@ public class Hand {
 	ArrayList<Card> MainHand = new ArrayList<Card>();
 	ArrayList<Card> splithand1 = new ArrayList<Card>();
 
-	int count;
 	int score;
 	double money = 1000;
 
 	boolean forfeit = false;
-	boolean win =false; //to determine if player won
+	boolean win = false; // to determine if player won
 
-	public Hand(Card a, Card b){
-		//ArrayList<Card> hand = new ArrayList<Card>();
+	public Hand(Card a, Card b) {
+		// ArrayList<Card> hand = new ArrayList<Card>();
 		MainHand.add(a);
 		MainHand.add(b);
-		//System.out.println("score: "+checkScore(hand));
+		// System.out.println("score: "+checkScore(hand));
 	}
-	
-	public ArrayList<Card> getMainHand(){ //shows hand
+
+	public ArrayList<Card> getMainHand() { // shows hand
 		return MainHand;
 	}
-	public ArrayList<Card> redeal(Card a, Card b){
+
+	public ArrayList<Card> redeal(Card a, Card b) {
 		MainHand.clear();
 		MainHand.add(a);
 		MainHand.add(b);
-		count = 0;
 		return MainHand;
 	}
 
-	public ArrayList<Card> getsplithand(){
+	public ArrayList<Card> getsplithand() {
 		return splithand1;
 	}
 
-	public String toString(){
+	public String toString() {
 		System.out.println("Your cards are:");
-		for(Card c: MainHand){
+		for (Card c : MainHand) {
 			System.out.println(c.toString());
 		}
 		return null;
 	}
 
-	public void hitMe(Card c, ArrayList<Card> specifichand){  //adds a card to the hand arraylist
+	public void hitMe(Card c, ArrayList<Card> specifichand) { // adds a card to
+																// the hand
+		       													// arraylist
 		specifichand.add(c);
 		toString();
-		count++;
-		//System.out.println("Your points are: " + checkScore(specifichand));
+		// System.out.println("Your points are: " + checkScore(specifichand));
 	}
 
-	public void split(Card d, Card e, ArrayList<Card> handtosplit){  //Splits the arraylist of coice 
-		splithand1.add(handtosplit.get(0)); //adds a card from the hand to splithand
-		handtosplit.remove(0); //removes the card added to splithand
-		splithand1.add(d); //adds a card to our new split hand
-		handtosplit.add(e);//adds a card to our hand
+	public void split(Card d, Card e, ArrayList<Card> handtosplit) { // Splits
+																		// the
+																		// arraylist
+																		// of
+																		// coice
+		splithand1.add(handtosplit.get(0)); // adds a card from the hand to
+											// splithand
+		handtosplit.remove(0); // removes the card added to splithand
+		splithand1.add(d); // adds a card to our new split hand
+		handtosplit.add(e);// adds a card to our hand
 	}
 
-	public int checkScore(ArrayList<Card> handtocheckscore){
-		int ace=0;
-		score=0;
-		for (Card cardvalue: handtocheckscore){  //adds up points in hand
-			if (cardvalue.getNumber() > 10){ //checks if card is a face card and adds 10
+	public int checkScore(ArrayList<Card> handtocheckscore) {
+		int ace = 0;
+		score = 0;
+		for (Card cardvalue : handtocheckscore) { // adds up points in hand
+			if (cardvalue.getNumber() > 10) { // checks if card is a face card
+												// and adds 10
 				score += 10;
-			}
-			else { //otherwise adds card value
+			} else { // otherwise adds card value
 				score += cardvalue.getNumber();
-				if (cardvalue.getNumber() == 1){ //if card is an ace adds 10
-					score += 10;
-					ace++;//increase ace count by one
-				}
 			}
-		} 
-		if (ace > 0 && score > 21){ //ace  anti bust logic
-			score -= 10;
-			ace-=1;// removes 1 ace from ace pool
-		}else if (score<=21 && count==5){// game winning logic by card count
-			System.out.println("You win by getting 5 cards!");
-			win = true;
-		}
-		else if(score>21){// game winning logic by dealer bust
-			System.out.println("You bust!");
-		}else if(score == 21){
-			win=true;
+			if (cardvalue.getNumber() == 1) { // if card is an ace adds 10
+				score += 10;
+				ace++;// increase ace count by one
+			}
+				if (ace > 0 && score > 21) { // ace anti bust logic
+					score -= 10;
+					ace--;// removes 1 ace from ace pool
+				}
 		}
 		return score;
 	}
-	public boolean didYouWin(){
-		return win;
-	}
-	
 
-	public void setMoney(double m){
-		money=m;
+	public void setMoney(double m) {
+		money = m;
 	}
-	public double getMoney(){
+
+	public double getMoney() {
 		return money;
 	}
 }

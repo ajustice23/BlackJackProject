@@ -15,7 +15,9 @@ public class Card {
 		number = n;
 		
 		String ss = "" + getSuit().charAt(0);
-		String nn = "" + getStringNumber().charAt(0);
+		String nn = "";
+		if (getStringNumber().equals("ten")) nn = "" + 10;
+		else nn = "" + getStringNumber().charAt(0);
 		xi = ss + nn;
 		
 		try {
@@ -37,11 +39,12 @@ public class Card {
 	}
 	
 	public String getStringNumber(){
-		String whatnumber;
-		if (number > 10){
+		String whatnumber = null;
+		if (number >=10){
+			if(number == 10) whatnumber = "ten";
 			if (number == 11) whatnumber = "jack";
 			if (number == 12) whatnumber = "queen";
-			else whatnumber = "king";
+			if (number == 13) whatnumber = "king";
 		}
 		else whatnumber = "" + number;
 		return whatnumber;
@@ -59,4 +62,3 @@ public class Card {
 		return getNumber() + " of " + getSuit() + " and " + xi;
 	}
 }
-

@@ -3,12 +3,10 @@ public class playBlackJack { //main method
  	 	
  	 	Deck tryDeck = new Deck();
 		Hand currentHand = new Hand(tryDeck.drawCard(),tryDeck.drawCard());
-		currentHand.toString();
-		Dealer currentDealer = new Dealer(tryDeck.drawCard(), tryDeck.drawCard());
-		//currentHand.hitMe(tryDeck.drawCard());
-		//currentHand.score();
-		//currentHand.askUser();
- 	 	
+		//currentHand.toString();
+		Hand currentDealer = new Hand(tryDeck.drawCard(), tryDeck.drawCard());
+		
+ 	 	currentDealer.toString();
  	 	ShowCard.showCards(currentHand, tryDeck, currentDealer);
   }
 }

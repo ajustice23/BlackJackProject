@@ -18,12 +18,15 @@ public class Deck {
 
 
 	public Card drawCard() {
-		
 		Card cardDrawn = deck.get(i);
 		i++;
 		//System.out.println(52-i);
 		return cardDrawn;
 
+	}
+	public void reshuffle(){
+		i=0;
+		Collections.shuffle(deck);
 	}
 	
 }
